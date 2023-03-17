@@ -3,9 +3,6 @@
 # 1. Python with GUROBI to solve an integer linear programming problem  from the paper: 
 Szádoczki, Z., Bozóki, S., & Tekile, H. A. (2022). Filling in pattern designs for incomplete pairwise comparison matrices:(quasi-) regular graphs with minimal diameter. Omega, 107, 102557.
 
-
-[ Let $N=\{1,\ldots,22\}$ be the nodes, and let $P=\{i \in N,j \in N:i<j\}$ be the set of node pairs. For $(i,j) \in P$, let binary decision variable $X_{i,j}$ indicate whether $(i,j)$ is an edge. For $(i,j) \in P$ and $k \in N \setminus \{i,j\}$, let binary decision variable $Y_{i,j,k}$ indicate whether $k$ is a common neighbor of $i$ and $j$. For $(i,j) \in P$ let binary decision variable $SLACK_{i,j}$ be a slack variable.
-
 - The problem has 5082 variables, 9493 constraints, and 1 objective function (when n=22)
 - The problem has 4410 variables, 8211 constraints, and 1 objective function (when n=21)
 
