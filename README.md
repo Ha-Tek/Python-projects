@@ -1,4 +1,5 @@
-#Python project: 5-quasi-regular graph using the OR-tools with CP-SAT solver in python in the case of  n=21 and diameter 2
+#5-quasi-regular graph using the OR-tools with CP-SAT solver in python in the case of  n=21 and diameter 2
+
 The code uses the CP-SAT solver from the OR-Tools library to solve a graph theory problem. The problem is to find a minimum weight spanning tree in an undirected graph with 21 nodes, where the degree of each node is 5 except for the last node, which has a degree of 6.
 
 The code first defines the number of nodes and their degree using a dictionary called degree, where the key is the node number and the value is its degree.
