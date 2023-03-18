@@ -17,7 +17,7 @@ There are $3 \cdot 22 = 66$ constraints of the form $\sum_{(i,j) \in P: k \in {i
 
 There are $|P| = 231$ constraints of the form $X_{i,j} + \sum_{k \in N \setminus {i,j}} Y_{i,j,k} + SLACK_{i,j} \geq 1$ for $(i,j) \in P$, which gives a total of 231 constraints.
 
-Finally, there are $2|P||N\setminus{i,j}| = 2 \cdot 231 \cdot 20 = 9240$ constraints of the form $Y_{i,j,k} \leq [i<k]X_{i,k} + [k<i]X_{k,i}$ and $Y_{i,j,k} \leq [j<k]X_{j,k} + [k<j]X_{k,j}$ for $(i,j) \in P$ and $k \in N \setminus {i,j}$, which gives a total of 9240 constraints.
+Finally, there are $2|P||N\setminus{i,j}| = 2 \cdot 231 \cdot 20 = 9240$ constraints of the form $Y_{i,j,k} <= [i<k]X_{i,k} + [k<i]X_{k,i}$ and $Y_{i,j,k} <= [j<k]X_{j,k} + [k<j]X_{k,j}$ for $(i,j) \in P$ and $k \in N \setminus {i,j}$, which gives a total of 9240 constraints.
 
 So the total number of constraints is $330 + 231 + 9240 = 9493$.
 
