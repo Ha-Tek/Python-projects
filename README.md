@@ -6,6 +6,8 @@ Szádoczki, Z., Bozóki, S., & Tekile, H. A. (2022). Filling in pattern designs 
 Let $N=\{1,\ldots,22\}$ be the nodes, and let $P=\{i \in N,j \in N:i \text{ less than } j\}$ be the set of node pairs. For $(i,j) \in P$, let binary decision variable $X_{i,j}$ indicate whether $(i,j)$ is an edge. For $(i,j) \in P$ and $k \in N \setminus \{i,j\}$, let binary decision variable $Y_{i,j,k}$ indicate whether $k$ is a common neighbor of $i$ and $j$. For $(i,j) \in P$ let binary decision variable $SLACK_{i,j}$ be a slack variable. 
 
 
+
+
 - The integer program contains 5082 variables, 9493 constraints, and 1 objective function (when n=22)
 
 To see this, let's count the number of variables and constraints in each part of the problem.
@@ -25,6 +27,26 @@ Finally, there are $2|P||N\setminus{i,j}| = 2 \cdot 231 \cdot 20 = 9240$ constra
 So the total number of constraints is $330 + 231 + 9240 = 9493$.
 
 Therefore, the integer program contains 5082 variables, 9493 constraints, and 1 objective function, as claimed.
+
+# An example of $Y_{i,j,k}$ and $SLACK_{i,j}$:
+
+Let's consider a simple undirected graph with five nodes: $N = {1, 2, 3, 4, 5}$, and let $X_{i,j}$ indicate whether there is an edge between nodes $i$ and $j$. Suppose we have $X_{1,2} = 1$, $X_{2,3} = 1$, $X_{3,4} = 1$, and $X_{4,5} = 1$. Then, we can define $Y_{i,j,k}$ as follows:
+
+
+- $Y_{1,2,3} = 1$ since nodes $1$ and $2$ share a common neighbor with node $3$ (namely, node $2$).
+- $Y_{1,2,4} = 0$ since nodes $1$ and $2$ do not share a common neighbor with node $4$.
+- $Y_{2,3,1} = 1$ since nodes $2$ and $3$ share a common neighbor with node $1$ (namely, node $2$).
+- $Y_{2,3,4} = 1$ since nodes $2$ and $3$ share a common neighbor with node $4$ (namely, node $3$).
+- $Y_{3,4,5} = 1$ since nodes $3$ and $4$ share a common neighbor with node $5$ (namely, node $4$).
+- $Y_{1,3,4} = 0$ since nodes $1$ and $3$ do not share a common neighbor with node $4$.
+
+Note that a node $k$ is a neighbor of a node $i$ if there exists an edge between nodes $i$ and $k$. Similarly, we say that a node $k$ is a neighbor of a node $j$ if there exists an edge between nodes $j$ and $k$. Therefore, when we say that $k$ is a common neighbor of nodes $i$ and $j$, we mean that $k$ is connected to both nodes $i$ and $j$ by an edge in the given graph.
+Note that in this example, we only defined $Y_{i,j,k}$ for a subset of all possible combinations of nodes $(i,j,k)$. In the actual formulation, $Y_{i,j,k}$ is defined for all $(i,j)$ pairs and all nodes $k$ that are not $i$ or $j$.
+
+- Let also be $N = {1, 2, 3, 4, 5}$, and let $X_{i,j}$ indicate whether there is an edge between nodes $i$ and $j$. Suppose we have $X_{1,2} = 1$, $X_{2,3} = 1$, $X_{3,4} = 1$, and $X_{4,5} = 1$. In this case, $N = {1, 2, 3, 4, 5}$, and $P = {(i,j): i,j \in N, i \text{less than} j} = {(1,2), (1,3), (1,4), (1,5), (2,3), (2,4), (2,5), (3,4), (3,5), (4,5)}$.
+
+The slack variable $SLACK_{i,j}$ measures the amount by which the sum of the degrees of nodes $i$ and $j$ exceeds $2$ (i.e., the number of edges that must be incident to $i$ and $j$ in a perfect matching). In this case, since we have $X_{1,2} = X_{2,3} = X_{3,4} = X_{4,5} = 1$, the sum of the degrees of any two nodes is exactly $2$, so $SLACK_{i,j}$ is always zero. In other words, it measures the "slack" in the degree constraints, i.e., how much the degree of nodes $i$ and $j$ can be increased without violating the degree constraint.
+
 # 2.  Machine Learning Classification Algorithms
 
 In this project, you will complete a notebook where you will build a classifier to predict whether a loan case will be paid off or not.
