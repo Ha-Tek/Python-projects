@@ -5,7 +5,23 @@ Szádoczki, Z., Bozóki, S., & Tekile, H. A. (2022). Filling in pattern designs 
 
 - The problem has 5082 variables, 9493 constraints, and 1 objective function (when n=22)
 
+To see this, let's count the number of variables and constraints in each part of the problem.
 
+Part 1: Variables
+
+There are $|P| = \binom{22}{2} = 231$ variables $X_{i,j}$ and $|P||N\setminus{i,j}| = 231 \cdot 20 = 4620$ variables $Y_{i,j,k}$, as well as $|P| = 231$ slack variables $SLACK_{i,j}$. So the total number of variables is $231 + 4620 + 231 = 5082$.
+
+Part 2: Constraints
+
+There are $3 \cdot 22 = 66$ constraints of the form $\sum_{(i,j) \in P: k \in {i,j}} X_{i,j} = 5$ for $k \in N$, which gives a total of $66 \cdot 5 = 330$ constraints.
+
+There are $|P| = 231$ constraints of the form $X_{i,j} + \sum_{k \in N \setminus {i,j}} Y_{i,j,k} + SLACK_{i,j} \geq 1$ for $(i,j) \in P$, which gives a total of 231 constraints.
+
+Finally, there are $2|P||N\setminus{i,j}| = 2 \cdot 231 \cdot 20 = 9240$ constraints of the form $Y_{i,j,k} \leq [i<k]X_{i,k} + [k<i]X_{k,i}$ and $Y_{i,j,k} \leq [j<k]X_{j,k} + [k<j]X_{k,j}$ for $(i,j) \in P$ and $k \in N \setminus {i,j}$, which gives a total of 9240 constraints.
+
+So the total number of constraints is $330 + 231 + 9240 = 9493$.
+
+Therefore, the problem has 5082 variables, 9493 constraints, and 1 objective function, as claimed.
 # 2.  Machine Learning Classification Algorithms
 
 In this project, you will complete a notebook where you will build a classifier to predict whether a loan case will be paid off or not.
