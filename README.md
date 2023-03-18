@@ -3,15 +3,14 @@
 # 1. Python with GUROBI to solve an integer linear programming problem  from the paper: 
 Szádoczki, Z., Bozóki, S., & Tekile, H. A. (2022). Filling in pattern designs for incomplete pairwise comparison matrices:(quasi-) regular graphs with minimal diameter. Omega, 107, 102557.
 
-Let $N=\{1,\ldots,22\}$ be the nodes, and let $P=\{i \in N,j \in N:i \text{less than }j\}$ be the set of node pairs. For $(i,j) \in P$, let binary decision variable $X_{i,j}$ indicate whether $(i,j)$ is an edge. For $(i,j) \in P$ and $k \in N \setminus \{i,j\}$, let binary decision variable $Y_{i,j,k}$ indicate whether $k$ is a common neighbor of $i$ and $j$. For $(i,j) \in P$ let binary decision variable $SLACK_{i,j}$ be a slack variable. 
+Let $N=\{1,\ldots,22\}$ be the nodes, and let $P=\{i \in N,j \in N:i \text{less than} j\}$ be the set of node pairs. For $(i,j) \in P$, let binary decision variable $X_{i,j}$ indicate whether $(i,j)$ is an edge. For $(i,j) \in P$ and $k \in N \setminus \{i,j\}$, let binary decision variable $Y_{i,j,k}$ indicate whether $k$ is a common neighbor of $i$ and $j$. For $(i,j) \in P$ let binary decision variable $SLACK_{i,j}$ be a slack variable. 
 
-\[
-\min{\sum_{(i,j) \in P}{SLACK_{i,j}}} \\
-\sum_{(i,j) \in P: k \in \{i,j\}}{X_{i,j} =5} \hspace{3cm} \text{ for } k \in N\\
-X_{i,j}+\sum_{k \in N \setminus \{i,j\}}{Y_{i,j,k}} + SLACK_{i,j} \geq 1 \hspace{1cm} \text{ for } (i,j) \in P\\
- Y_{i,j,k} \leq X_{i,k}[\text{ if }i\text{ less than }k]+X_{k,i}[\text{ if }k\text{ less than }i] \hspace{2cm} \text{ for $(i,j)$} \in P \text{ and }k \in N \setminus \{i,j\}\\
- Y_{i,j,k} \leq X_{j,k}[\text{ if }j\text{ less than }k]+X_{k,j}[\text{ if }k\text{ less than }j] \hspace{2cm} \text{ for $(i,j)$} \in P \text{ and }k \in N \setminus \{i,j\}
-\]
+
+$\min{\sum_{(i,j) \in P}{SLACK_{i,j}}}$
+$\sum_{(i,j) \in P: k \in \{i,j\}}{X_{i,j} =5} \hspace{3cm} \text{for} k \in N$
+$X_{i,j}+\sum_{k \in N \setminus \{i,j\}}{Y_{i,j,k}} + SLACK_{i,j} \geq 1 \hspace{1cm} \text{ for } (i,j) \in P$
+$ Y_{i,j,k} \leq X_{i,k}(i \text{less than} k)+X_{k,i}(k \text{less than} i) \hspace{2cm} \text{for $(i,j)$} \in P \text{ and }k \in N \setminus \{i,j\}$
+ $Y_{i,j,k} \leq X_{j,k}(j \text{less than} k)+X_{k,j}(k \text{less than} j) \hspace{2cm} \text{for $(i,j)$} \in P \text{ and }k \in N \setminus \{i,j\}$
 
 
 - The problem has 5082 variables, 9493 constraints, and 1 objective function (when n=22)
