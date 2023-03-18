@@ -3,12 +3,12 @@
 # 1. Python with GUROBI to solve an integer linear programming problem  from the paper: 
 Szádoczki, Z., Bozóki, S., & Tekile, H. A. (2022). Filling in pattern designs for incomplete pairwise comparison matrices:(quasi-) regular graphs with minimal diameter. Omega, 107, 102557.
 \begin{framed}
-Let $N=\{1,\ldots,22\}$ be the nodes, and let $P=\{i \in N,j \in N:i<j\}$ be the set of node pairs. For $(i,j) \in P$, let binary decision variable $X_{i,j}$ indicate whether $(i,j)$ is an edge. For $(i,j) \in P$ and $k \in N \setminus \{i,j\}$, let binary decision variable $Y_{i,j,k}$ indicate whether $k$ is a common neighbor of $i$ and $j$. For $(i,j) \in P$ let binary decision variable $SLACK_{i,j}$ be a slack variable. Is it true that the following integer programming problem has 5082 variables, 9493 constraints, and 1 objective function?: \begin{align}
+Let $N=\{1,\ldots,22\}$ be the nodes, and let $P=\{i \in N,j \in N:i \text{less than }j\}$ be the set of node pairs. For $(i,j) \in P$, let binary decision variable $X_{i,j}$ indicate whether $(i,j)$ is an edge. For $(i,j) \in P$ and $k \in N \setminus \{i,j\}$, let binary decision variable $Y_{i,j,k}$ indicate whether $k$ is a common neighbor of $i$ and $j$. For $(i,j) \in P$ let binary decision variable $SLACK_{i,j}$ be a slack variable. Is it true that the following integer programming problem has 5082 variables, 9493 constraints, and 1 objective function?: \begin{align}
 \min{\sum_{(i,j) \in P}{SLACK_{i,j}}} \hspace{5cm}\\
 \sum_{(i,j) \in P: k \in \{i,j\}}{X_{i,j} =5} \hspace{3cm} \text{ for } k \in N\\
 X_{i,j}+\sum_{k \in N \setminus \{i,j\}}{Y_{i,j,k}} + SLACK_{i,j} \geq 1 \hspace{1cm} \text{ for } (i,j) \in P\\
- Y_{i,j,k} \leq [i<k]X_{i,k}+[k<i]X_{k,i} \hspace{2cm} \text{ for $(i,j)$} \in P \text{ and }k \in N \setminus \{i,j\}\\
- Y_{i,j,k} \leq [j<k]X_{j,k}+[k<j]X_{k,j} \hspace{2cm} \text{ for $(i,j)$} \in P \text{ and }k \in N \setminus \{i,j\}
+ Y_{i,j,k} \leq [i\text{ less than }k]X_{i,k}+[k\text{ less than }i]X_{k,i} \hspace{2cm} \text{ for $(i,j)$} \in P \text{ and }k \in N \setminus \{i,j\}\\
+ Y_{i,j,k} \leq [j\text{ less than }k]X_{j,k}+[k\text{ less than }j]X_{k,j} \hspace{2cm} \text{ for $(i,j)$} \in P \text{ and }k \in N \setminus \{i,j\}
 \end{align}
 \end{framed}
 
