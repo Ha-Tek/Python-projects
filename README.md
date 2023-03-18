@@ -6,7 +6,7 @@ Szádoczki, Z., Bozóki, S., & Tekile, H. A. (2022). Filling in pattern designs 
 Let $N=\{1,\ldots,22\}$ be the nodes, and let $P=\{i \in N,j \in N:i \text{ less than } j\}$ be the set of node pairs. For $(i,j) \in P$, let binary decision variable $X_{i,j}$ indicate whether $(i,j)$ is an edge. For $(i,j) \in P$ and $k \in N \setminus \{i,j\}$, let binary decision variable $Y_{i,j,k}$ indicate whether $k$ is a common neighbor of $i$ and $j$. For $(i,j) \in P$ let binary decision variable $SLACK_{i,j}$ be a slack variable. 
 
 
-- The problem has 5082 variables, 9493 constraints, and 1 objective function (when n=22)
+- The integer program contains 5082 variables, 9493 constraints, and 1 objective function (when n=22)
 
 To see this, let's count the number of variables and constraints in each part of the problem.
 
@@ -24,7 +24,7 @@ Finally, there are $2|P||N\setminus{i,j}| = 2 \cdot 231 \cdot 20 = 9240$ constra
 
 So the total number of constraints is $330 + 231 + 9240 = 9493$.
 
-Therefore, the problem has 5082 variables, 9493 constraints, and 1 objective function, as claimed.
+Therefore, the integer program contains 5082 variables, 9493 constraints, and 1 objective function, as claimed.
 # 2.  Machine Learning Classification Algorithms
 
 In this project, you will complete a notebook where you will build a classifier to predict whether a loan case will be paid off or not.
