@@ -55,7 +55,7 @@ $$ = \max {0, 1+  0+0-2}=0,$$
 
 and similarly for all other pairs $(i,j) \in P$.
 
-# A simple example to understand the first cinstraint $\sum_{(i,j) \in P: k \in \{i,j\}}{X_{i,j} = degree[k]}$:
+# A simple example to understand the first constraint $\sum_{(i,j) \in P: k \in \{i,j\}}{X_{i,j} = degree[k]}$:
 
 Let $N=\{1,2,3,4\}$ be the nodes, and assume we want to find a graph with degree 2 (for the sake of simplicity). 
 
