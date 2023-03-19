@@ -55,6 +55,22 @@ $$ = \max {0, 1+  0+0-2}=0,$$
 
 and similarly for all other pairs $(i,j) \in P$.
 
+# A simple example to understand the first cinstraint $\sum_{(i,j) \in P: k \in \{i,j\}}{X_{i,j} = degree[k]}$:
+
+Let $N=\{1,2,3,4\}$ be the nodes, and assume we want to find a graph with degree 2 (for the sake of simplicity). 
+
+The constraint $\sum_{(i,j) \in P: k \in \{i,j\}}{X_{i,j} =2}$ enforces that each node $k$ must be incident to exactly two edges.
+
+Let's consider an example to illustrate this constraint. Suppose we have a graph with nodes $N={1,2,3,4}$, and edges $(1,2)$, $(1,3)$, and $(2,4)$.
+Then, we have $X_{1,2}=X_{1,3}=X_{2,4}=1$ and all other $X_{i,j}=0$. Now, let's check the constraint for each node $k$:
+
+For $k=1$, we have $(i,j)\in{(1,2),(1,3)}$, so $\sum_{(i,j)\in P:k\in{i,j}}X_{i,j}=X_{1,2}+X_{1,3}=2$.
+For $k=2$, we have $(i,j)=(1,2)$ and $(i,j)=(2,4)$, so $\sum_{(i,j)\in P:k\in{i,j}}X_{i,j}=X_{1,2}+X_{2,4}=2$.
+For $k=3$, we have $(i,j)=(1,3)$ and $(i,j)=(3,4)$, so $\sum_{(i,j)\in P:k\in{i,j}}X_{i,j}=X_{1,3}+0=1$.
+For $k=4$, we have $(i,j)=(2,4)$ and $(i,j)=(3,4)$, so $\sum_{(i,j)\in P:k\in{i,j}}X_{i,j}=0+X_{2,4}=1$.
+Therefore, the constraint is satisfied for all nodes $k\in N$. Intuitively, this constraint ensures that each node is connected to exactly two other nodes, which is a property of a planar graph.
+
+
 # 2.  Machine Learning Classification Algorithms
 
 In this project, you will complete a notebook where you will build a classifier to predict whether a loan case will be paid off or not.
