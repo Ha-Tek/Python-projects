@@ -1,0 +1,67 @@
+# Author: Hailemariam Abebe Tekile
+# Gurobi in Python: Solve an integer linear programming (or binary integer programming) to find the 5-regular graph with 22 vertices, diameter 2 and degree 5 in the following paper.
+# Reference: Szádoczki, Z., Bozóki, S., & Tekile, H. A. (2022). Filling in pattern designs for incomplete pairwise comparison matrices:(quasi-) regular graphs with minimal diameter. Omega, 107, 102557.
+
+#import modules
+import gurobipy as gp
+from gurobipy import GRB
+
+# Number of vertices/Nodes
+n = 22
+#Set of vertices/nodes
+NODES = range(1, n+1)
+
+# Degree is 5 (to find 5-regular graph)
+degree = {k: 5 for k in NODES}
+NODE_PAIRS = [(i, j) for i in NODES for j in NODES if i < j]
+
+# Define the optimization model
+model = gp.Model();
+
+# Define the decision variables
+X = model.addVars(NODE_PAIRS, vtype=gp.GRB.BINARY, name="X")
+Y = model.addVars(NODE_PAIRS, NODES, vtype=gp.GRB.BINARY, name="Y")
+
+# Define slack variables
+Slack = model.addVars(NODE_PAIRS, name="Slack", lb=0)
+
+# Add constraints:
+#Constraint 1 (named as DegreeCon) enforces 5-regularity
+DegreeCon = model.addConstrs((gp.quicksum(X[i, j] for i, j in NODE_PAIRS if k in (i, j)) == degree[k] for k in NODES),
+                             name="DegreeCon") 
+#Constraint 2 (named as DiameterTwo) enforces diameter 2
+DiameterTwo = model.addConstrs((X[i, j] + gp.quicksum(Y[i, j, k] for k in NODES if k not in (i, j)) + Slack[i, j] >= 1
+                                for i, j in NODE_PAIRS), name="DiameterTwo")
+#Constraint 3 (named as CommonNeighbor1) enforces that Y[i,j,k] = 1 implies k is a neighbor of i and j
+CommonNeighbor1 = model.addConstrs((Y[i, j, k] <= (X[i, k] if (i, k) in NODE_PAIRS else X[k, i])
+                                    for i, j in NODE_PAIRS for k in NODES if k not in (i, j)),
+                                   name="CommonNeighbor1")
+#Constraint 4 (named as CommonNeighbor2) enforces that Y[i,j,k] = 1 implies k is a neighbor of i and j
+CommonNeighbor2 = model.addConstrs((Y[i, j, k] <= (X[j, k] if (j, k) in NODE_PAIRS else X[k, j])
+                                    for i, j in NODE_PAIRS for k in NODES if k not in (i, j)),
+                                   name="CommonNeighbor2")
+
+# Set the objective function
+model.setObjective(gp.quicksum(Slack[i, j] for i, j in NODE_PAIRS), sense=gp.GRB.MINIMIZE)
+
+# Optimize the model
+model.optimize()
+
+if model.status == gp.GRB.OPTIMAL:
+    #X_sol = {(i, j): X[i, j].x for i, j in NODE_PAIRS}
+    #Y_sol = {(i, j, k): Y[i, j, k].x for i, j in NODE_PAIRS for k in NODES if k not in (i, j)}
+    EDGES = {(i, j) for i, j in NODE_PAIRS if X[i, j].x > 0.5} # Print all the edges with a value greater than 0.5 (possible we can make x ==1) 
+    
+    # Print the optimal solutions/EDGES
+    #print("X_sol =", X_sol)
+    #print("Y_sol =", Y_sol)
+    print("EDGES =", EDGES)
+
+ 
+# Check feasibility
+feasible = model.feasibility()
+
+if feasible == gp.GRB.INFEASIBLE:
+    print("Problem is infeasible.")
+else:
+    print("Problem is feasible.")
