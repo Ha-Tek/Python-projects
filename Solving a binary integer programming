@@ -1,6 +1,7 @@
-# Author: Hailemariam Abebe Tekile
 # Gurobi in Python: Solve an integer linear programming (or binary integer programming) to find the 5-regular graph with 22 vertices, diameter 2 and degree 5 in the following paper.
 # Reference: Szádoczki, Z., Bozóki, S., & Tekile, H. A. (2022). Filling in pattern designs for incomplete pairwise comparison matrices:(quasi-) regular graphs with minimal diameter. Omega, 107, 102557.
+# Author: Hailemariam Abebe Tekile
+# January 03, 2022.
 
 #import modules
 import gurobipy as gp
