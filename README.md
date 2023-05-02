@@ -29,7 +29,7 @@ $$\mathbf{\hat{A}(x)} =
 {\color{red}1/x_2} &3 &1/3 &1
 \end{pmatrix}.$$
 
- The constrained eigenvalue minimization problem can be constructed as follows: 
+- The constrained eigenvalue minimization problem can be constructed as follows: 
 \begin{equation*}\label{Problem:2}
 \begin{aligned}
 \min \quad & \lambda_{max} \mathbf{(\hat{A}(x))}\\
@@ -38,7 +38,7 @@ $$\mathbf{\hat{A}(x)} =
 \end{aligned}
 \end{equation*}
 
-Applying the Nelder-Mead algorithm, the algorithm arrives at the solution {\color{red}$x_1=3$} and {\color{red}$x_2=1$} 
+- Applying the Nelder-Mead algorithm, the algorithm arrives at the solution {\color{red}$x_1=3$} and {\color{red}$x_2=1$} 
 with $\lambda_{max}=4$. Consequently, the simplex steps of the algorithm that leads to the optimal solution are provided.
 
 # 3.  Machine Learning Classification Algorithms
