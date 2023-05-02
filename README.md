@@ -19,8 +19,29 @@ $Y_{i,j,k} \leq X_{j,k}$ [for j<k]+ $X_{k,j}$ [for k<j], $(i,j) \in P$ for  $k \
 - The integer program contains 5082 variables, 9493 constraints, and 1 objective function (when n=22)
 
 
+#2. The Nelder-Mead Algorithm simplex steps for the optimal completion of incomplete PCMs
+Consider the incomplete PCM $\mathbf{\hat{A}}$ with {\color{red}two unknowns} $(x_1,x_2)=\mathbf{x}$: 
+$$\mathbf{\hat{A}(x)} = 
+\begin{pmatrix}
+1 &{\color{red}x_1} &1/3 &{\color{red}x_2}\\
+{\color{red}1/x_1}  &1  &1/9 &1/3\\
+3 &9 &1 &3\\
+{\color{red}1/x_2} &3 &1/3 &1
+\end{pmatrix}.$$
 
-# 2.  Machine Learning Classification Algorithms
+ The constrained eigenvalue minimization problem can be constructed as follows: 
+\begin{equation*}\label{Problem:2}
+\begin{aligned}
+\min \quad & \lambda_{max} \mathbf{(\hat{A}(x))}\\
+\textrm{s.t.} \quad &1/9\leq x_1 \leq 9 \\
+  &1/9\leq x_2 \leq 9 . 
+\end{aligned}
+\end{equation*}
+
+Applying the Nelder-Mead algorithm, the algorithm arrives at the solution {\color{red}$x_1=3$} and {\color{red}$x_2=1$} 
+with $\lambda_{max}=4$. Consequently, the simplex steps of the algorithm that leads to the optimal solution are provided.
+
+# 3.  Machine Learning Classification Algorithms
 
 In this project, you will complete a notebook where you will build a classifier to predict whether a loan case will be paid off or not.
 You load a historical dataset from  loan applications, clean the data, and apply different classification algorithm on the data. You are expected to use the following algorithms to build your models:
