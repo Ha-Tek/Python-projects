@@ -39,7 +39,7 @@ $$\mathbf{A}(x) =
 \end{equation*}
 
 - Applying the Nelder-Mead algorithm, the algorithm arrives at the solution $x_1=3$ and $x_2=1$
-with $\lambda_{max}=4$. Consequently, the simplex steps of the algorithm that leads to the optimal solution are provided.
+with $\lambda_{max}=4$. Consequently, the simplex steps of the algorithm that leads to the optimal solution are provided in the form of animation graphics.
 
 # 3.  Machine Learning Classification Algorithms
 
