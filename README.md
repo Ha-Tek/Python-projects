@@ -20,14 +20,14 @@ $Y_{i,j,k} \leq X_{j,k}$ [for j<k]+ $X_{k,j}$ [for k<j], $(i,j) \in P$ for  $k \
 
 
 # 2. The Nelder-Mead Algorithm simplex steps for the optimal completion of incomplete pairwise comparison matrices
-Consider the incomplete PCM $\mathbf{\hat{A}}$ with two unknowns $(x_1,x_2)=\mathbf{x}$: 
-$$\mathbf{A}(x) = 
+Consider the incomplete PCM $\mathbf{A}$ with two unknowns $(x_1,x_2)=\mathbf{x}$: 
+$\mathbf{A}(x) = 
 \begin{pmatrix}
 1 &x_1 &1/3 &x_2\\
 1/x_1  &1  &1/9 &1/3\\
 3 &9 &1 &3\\
 {1/x_2 &3 &1/3 &1
-\end{pmatrix}.$$
+\end{pmatrix}.$
 
 - The constrained eigenvalue minimization problem can be constructed as follows: 
 \begin{equation*}
