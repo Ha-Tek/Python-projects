@@ -19,7 +19,7 @@ $Y_{i,j,k} \leq X_{j,k}$ [for j<k]+ $X_{k,j}$ [for k<j], $(i,j) \in P$ for  $k \
 - The integer program contains 5082 variables, 9493 constraints, and 1 objective function (when n=22)
 
 
-# 2. The Nelder-Mead Algorithm simplex steps for the optimal completion of incomplete PCMs
+# 2. The Nelder-Mead Algorithm simplex steps for the optimal completion of incomplete pairwise comparison matrices
 Consider the incomplete PCM $\mathbf{\hat{A}}$ with {\color{red}two unknowns} $(x_1,x_2)=\mathbf{x}$: 
 $$\mathbf{\hat{A}(x)} = 
 \begin{pmatrix}
