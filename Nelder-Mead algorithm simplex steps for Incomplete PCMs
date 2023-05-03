@@ -9,7 +9,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib import animation
 from scipy.optimize import minimize
-#from matplotlib.animation import FuncAnimation, PillowWriter
+from matplotlib.animation import FuncAnimation, PillowWriter
 from scipy.linalg import eig
 
 # Define function to minimize
