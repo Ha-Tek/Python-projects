@@ -24,7 +24,7 @@ model.obj = pyo.Objective(expr=2*x + 3*y, sense = maximize)
 model.constraint1 = pyo.Constraint(expr=3*x + 4*y <= 25)
 model.constraint2 = pyo.Constraint(expr=2*x + 5*y <= 30)
 
-# Solve the optimization problem
+# Solve the optimization/maximization problem
 solver = pyo.SolverFactory('glpk')  # Choose the solver
 solver.solve(model)
 
