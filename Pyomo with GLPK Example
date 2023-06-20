@@ -1,4 +1,5 @@
-# Pyomo Pyomo with GLPK and Gurobi Example
+# Pyomo Pyomo with GLPK and Gurobi Example, which  solves a simple linear programming problem.
+# Source: Optimization with Python: Solve Operations Research Problems (Udemy course)
 
 # Note that you need to have Pyomo and a solver (such as GLPK or Gurobi) installed to run this code successfully.
 
