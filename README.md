@@ -89,3 +89,11 @@ Notice 2: You have to create an IBM Object Storage, if you dont have any IBM Obj
 - Start running the notebook
 - Complete the notebook based on the description in the notebook.
 
+# 4.  Pyomo with solvers GLPK and IPOPT 
+- Pyomo is a Python-based open-source software package that supports a diverse set of optimization capabilities for formulating, solving, and analyzing optimization models. Refer http://www.pyomo.org
+
+- The GLPK (GNU Linear Programming Kit) package is intended for solving large-scale linear programming (LP), mixed integer programming (MIP), and other related problems. It is a set of routines written in ANSI C and organized in the form of a callable library. Refer https://www.gnu.org/software/glpk/
+- If you don’t have acadeic license, it is better to use this solver inside Pyomo. See the installation page: https://ports.macports.org/port/glpk/
+
+- Ipopt (Interior Point Optimizer, pronounced "Eye-Pea-Opt") is an open source software package for large-scale nonlinear optimization. Refer the documentation in https://coin-or.github.io/Ipopt/
+- Installation: see https://www.coin-or.org/download/binary/Ipopt/
