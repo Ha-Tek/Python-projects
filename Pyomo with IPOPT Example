@@ -1,4 +1,4 @@
-#Exercise 1: Solve the  nonlinear programming using IPOPT solver:
+#Exercise 1: Solve the following nonlinear programming using IPOPT solver:
 #Solve $\max \cos(x+1) + \cos(x) + \cos(y)$
 #s.t. $-5 \leq x \leq 5$
 #     $-5 \leq y \leq 5$
