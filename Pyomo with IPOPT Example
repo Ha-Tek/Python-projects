@@ -1,4 +1,55 @@
-# Solve nonlinear programming using IPOPT solver
+#Exercise 1: Solve the  nonlinear programming using IPOPT solver:
+#Solve $\max \cos(x+1) + \cos(x) + \cos(y)$
+#s.t. $-5 \leq x \leq 5$
+#     $-5 \leq y \leq 5$
+    
+#initialize = (-2,-2), tolerance = 1e-6
+---------------------------------------------------------
+import pyomo.environ as pyo
+from pyomo.environ import *
+from pyomo.opt import SolverFactory
+
+# Create concrete model
+model = pyo.ConcreteModel()
+
+# Decision variables with bounds
+model.x = pyo.Var(initialize = -2, bounds=(-5,5)) 
+model.y = pyo.Var(initialize = -2, bounds=(-5,5)) 
+
+x = model.x
+y = model.y
+
+# Define the objective function
+model.obj = pyo.Objective(expr = cos(x+1) + cos(x)*cos(y), sense = maximize)
+
+# Define the constraints
+# model.constraint1 = pyo.Constraint(expr=3*x + 4*y <= 25)
+# model.constraint2 = pyo.Constraint(expr=2*x*y + 5*y <= 30)
+
+# Solve the nonlinear optimization problem using solver ipopt
+opt = pyo.SolverFactory('ipopt', executable = "/Users/hailemariam/Desktop/Ipopt-3.11.1-mac-osx-x86_64-gcc4.5.3/bin/ipopt")  # Choose the solver and the folder
+opt.options["tol"] = 1e-6 #tolerance with max error 1e-6
+opt.solve(model)
+
+# Print the solution
+#print("Objective value:", model.obj())
+#print("x =", model.x())
+#print("y =", model.y())
+
+# Print the solution
+model.pprint()
+print("Objective value:", pyo.value(model.obj))
+print("x =", pyo.value(x))
+print("y =", pyo.value(y))
+----------------------------------------------------------------------------------------------------
+Ans. Multiple local solutions with varying initilize:
+Objective value: 0.9588510772084042
+x = -2.070796307837297
+y = -3.1415925748454043
+----------------------------------------------------------------------------------------------------
+
+
+#EXERCISE 2: Solve another nonlinear programming using IPOPT solver
 
 import pyomo.environ as pyo
 #from pyomo.environ import *
@@ -29,3 +80,10 @@ solver.solve(model)
 print("Objective value:", model.obj())
 print("x =", model.x())
 print("y =", model.y())
+
+----------------------------------------------------------------------------------------------------
+Ans. Objective value: 43.66800831743047
+x = 5.972853552649766
+y = 1.770359897632616
+----------------------------------------------------------------------------------------------------
+
