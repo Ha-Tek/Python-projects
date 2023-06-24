@@ -2,6 +2,7 @@
 # NSGA-II in PYMOO
 # Source: Udemy -- Solve optimization problems with CPLEX, Gurobi, Pyomo... using linear programming, nonlinear, evolutionary algorithms
 
+# Exercise 1: Solve the following bi-objective functions using NSGA-II.
 #min f1(x)=100(x1^2+x2^2)
 #min f1(x)=100(x1-1)ˆ2+x2^2
 #s.t. g1(x)=2*(x1-0.1) * (x1-0.9) / 0.18 <= 0
@@ -65,3 +66,6 @@ res = minimize(problem,
 #get solutions
 X = res.X
 F = res.F
+print(X)
+print(F)
+
