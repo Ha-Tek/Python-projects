@@ -1,6 +1,6 @@
 # pymoo: Multi-objective Optimization in Python ( https://pymoo.org/ )
 # NSGA-II in PYMOO
-# Source: Udemy
+# Source: Udemy -- Solve optimization problems with CPLEX, Gurobi, Pyomo... using linear programming, nonlinear, evolutionary algorithms
 
 #min f1(x)=100(x1^2+x2^2)
 #min f1(x)=100(x1-1)ˆ2+x2^2
