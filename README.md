@@ -43,8 +43,8 @@ with $\lambda_{max}=4$. Consequently, the simplex steps of the algorithm that le
 
 # 3.  Machine Learning Classification Algorithms
 
-In this project, you will complete a notebook where you will build a classifier to predict whether a loan case will be paid off or not.
-You load a historical dataset from  loan applications, clean the data, and apply different classification algorithm on the data. You are expected to use the following algorithms to build your models:
+In this project, I will complete a notebook where I will build a classifier to predict whether a loan case will be paid off or not.
+I load a historical dataset from  loan applications, clean the data, and apply different classification algorithm on the data. I am expected to use the following algorithms to build your models:
 
 - k-Nearest Neighbour
 - Decision Tree
