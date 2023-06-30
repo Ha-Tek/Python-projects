@@ -58,7 +58,7 @@ The results is reported as the accuracy of each classifier, using the following 
 - LogLoass
 
 
-# 4.  Pyomo with solvers GLPK and IPOPT 
+# 4.  Pyomo with solvers GLPK, IPOPT and GUROBI
 - Pyomo is a Python-based open-source software package that supports a diverse set of optimization capabilities for formulating, solving, and analyzing optimization models (framework for linear and nonlinear programming with many potential libraries). Refer http://www.pyomo.org
 
 - The GLPK (GNU Linear Programming Kit) package is intended for solving large-scale linear programming (LP), mixed integer programming (MIP), and other related problems. It is a set of routines written in ANSI C and organized in the form of a callable library. Refer https://www.gnu.org/software/glpk/
@@ -68,7 +68,7 @@ The results is reported as the accuracy of each classifier, using the following 
 For installation: see https://www.coin-or.org/download/binary/Ipopt/
 # Example:  CASE STUDY
 
-Solve the following maximization problem (set upper limit of m and t as M=10, T=4, respectively):
+Solve the following maximization problem using GUROBI (set upper limit of m and t as M=10, T=4, respectively):
 
 $\max \sum_m \sum_t x_{m,t}$
 
