@@ -50,6 +50,8 @@ results = opt.solve(model)
 
 #solutions
 model.pprint()
+#the value of the objective function
+pyo.value(model.obj)
 ----------------------------------------------------------------------------------------------------------
 #ANSWER:
 7 Set Declarations
