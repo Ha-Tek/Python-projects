@@ -1,4 +1,161 @@
-#Exercise 1: Solve the following nonlinear programming using IPOPT solver:
+#Exercise 1: Solve the following maximization problem using GUROBI solver:
+
+#\begin{equation}
+#\max \sum_m \sum_t x_{m,t}\\
+#     2x_{2,t} - 8x_{3,t} \leq 0 \, \forall t\\
+#      x_{2,t} - 2x_{3,t-2} + x_{4,t} \geq 1\, \forall t>2\\ 
+#     \sum_m x_{m,t}  \leq 50 \, \forall t\\
+#      x_{1,t} - x_{2,t-1} + x_{3,t} + x_{4,t}\leq 10\, \forall t>1\\
+#      0 \leq x_{m,t} \leq 10 \, \forall m, \forall t
+#\end{equation}
+
+# SET M=10, T=4:
+
+import pyomo.environ as pyo
+#from pyomo.environ import * # Note that, without this, 3 cases are changed (pyo.ConcreteModel(), pyo.Integers,  pyo.maximize )
+from pyomo.opt import SolverFactory
+
+model = pyo.ConcreteModel()
+
+M = 10
+T = 4
+
+# Variables
+model.x = Var(range(1,M+1), range(1,T+1), within=pyo.Integers, bounds = (0,10))
+x = model.x
+
+#Objective function
+model.obj = pyo.Objective(expr= sum([x[m,t] for m in range(1,M+1) for t in range(1,T+1)]), sense=pyo.maximize) 
+
+#Constraints
+model.C1 = pyo.ConstraintList()
+for t in range(1,T+1):
+     model.C1.add(expr = 2*x[2,t] - 8*x[3,t] <= 0)
+
+model.C2 = pyo.ConstraintList()
+for t in range(3,T+1): # because t>2
+     model.C2.add(expr = x[2,t] - 2*x[3,t-2] + x[4,t] >= 1)
+    
+model.C3 = pyo.ConstraintList()
+for t in range(1,T+1):
+        model.C3.add(expr = sum([x[m,t] for m in range(1,M+1)]) <= 50)
+        
+model.C4 = pyo.ConstraintList()
+for t in range(2,T+1): # because t>1
+     model.C4.add(expr = x[1,t] -x[2,t-1] + x[3,t] + x[4,t] <= 10)
+
+#Solve
+opt = SolverFactory("gurobi")
+results = opt.solve(model)
+
+#solutions
+model.pprint()
+----------------------------------------------------------------------------------------------------------
+#ANSWER:
+7 Set Declarations
+    C1_index : Size=1, Index=None, Ordered=Insertion
+        Key  : Dimen : Domain : Size : Members
+        None :     1 :    Any :    4 : {1, 2, 3, 4}
+    C2_index : Size=1, Index=None, Ordered=Insertion
+        Key  : Dimen : Domain : Size : Members
+        None :     1 :    Any :    2 : {1, 2}
+    C3_index : Size=1, Index=None, Ordered=Insertion
+        Key  : Dimen : Domain : Size : Members
+        None :     1 :    Any :    4 : {1, 2, 3, 4}
+    C4_index : Size=1, Index=None, Ordered=Insertion
+        Key  : Dimen : Domain : Size : Members
+        None :     1 :    Any :    3 : {1, 2, 3}
+    x_index : Size=1, Index=None, Ordered=True
+        Key  : Dimen : Domain              : Size : Members
+        None :     2 : x_index_0*x_index_1 :   40 : {(1, 1), (1, 2), (1, 3), (1, 4), (2, 1), (2, 2), (2, 3), (2, 4), (3, 1), (3, 2), (3, 3), (3, 4), (4, 1), (4, 2), (4, 3), (4, 4), (5, 1), (5, 2), (5, 3), (5, 4), (6, 1), (6, 2), (6, 3), (6, 4), (7, 1), (7, 2), (7, 3), (7, 4), (8, 1), (8, 2), (8, 3), (8, 4), (9, 1), (9, 2), (9, 3), (9, 4), (10, 1), (10, 2), (10, 3), (10, 4)}
+    x_index_0 : Size=1, Index=None, Ordered=Insertion
+        Key  : Dimen : Domain : Size : Members
+        None :     1 :    Any :   10 : {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+    x_index_1 : Size=1, Index=None, Ordered=Insertion
+        Key  : Dimen : Domain : Size : Members
+        None :     1 :    Any :    4 : {1, 2, 3, 4}
+
+1 Var Declarations
+    x : Size=40, Index=x_index
+        Key     : Lower : Value : Upper : Fixed : Stale : Domain
+         (1, 1) :     0 :  -0.0 :    10 : False : False : Integers
+         (1, 2) :     0 :  -0.0 :    10 : False : False : Integers
+         (1, 3) :     0 :  -0.0 :    10 : False : False : Integers
+         (1, 4) :     0 :  -0.0 :    10 : False : False : Integers
+         (2, 1) :     0 :   0.0 :    10 : False : False : Integers
+         (2, 2) :     0 :  -0.0 :    10 : False : False : Integers
+         (2, 3) :     0 :  -0.0 :    10 : False : False : Integers
+         (2, 4) :     0 :  -0.0 :    10 : False : False : Integers
+         (3, 1) :     0 :   0.0 :    10 : False : False : Integers
+         (3, 2) :     0 :   3.0 :    10 : False : False : Integers
+         (3, 3) :     0 :   3.0 :    10 : False : False : Integers
+         (3, 4) :     0 :   3.0 :    10 : False : False : Integers
+         (4, 1) :     0 :  -0.0 :    10 : False : False : Integers
+         (4, 2) :     0 :   0.0 :    10 : False : False : Integers
+         (4, 3) :     0 :   1.0 :    10 : False : False : Integers
+         (4, 4) :     0 :   7.0 :    10 : False : False : Integers
+         (5, 1) :     0 :  -0.0 :    10 : False : False : Integers
+         (5, 2) :     0 :  -0.0 :    10 : False : False : Integers
+         (5, 3) :     0 :  -0.0 :    10 : False : False : Integers
+         (5, 4) :     0 :  -0.0 :    10 : False : False : Integers
+         (6, 1) :     0 :  10.0 :    10 : False : False : Integers
+         (6, 2) :     0 :  10.0 :    10 : False : False : Integers
+         (6, 3) :     0 :  10.0 :    10 : False : False : Integers
+         (6, 4) :     0 :  10.0 :    10 : False : False : Integers
+         (7, 1) :     0 :  10.0 :    10 : False : False : Integers
+         (7, 2) :     0 :  10.0 :    10 : False : False : Integers
+         (7, 3) :     0 :   6.0 :    10 : False : False : Integers
+         (7, 4) :     0 :  10.0 :    10 : False : False : Integers
+         (8, 1) :     0 :  10.0 :    10 : False : False : Integers
+         (8, 2) :     0 :   7.0 :    10 : False : False : Integers
+         (8, 3) :     0 :  10.0 :    10 : False : False : Integers
+         (8, 4) :     0 :  10.0 :    10 : False : False : Integers
+         (9, 1) :     0 :  10.0 :    10 : False : False : Integers
+         (9, 2) :     0 :  10.0 :    10 : False : False : Integers
+         (9, 3) :     0 :  10.0 :    10 : False : False : Integers
+         (9, 4) :     0 :  -0.0 :    10 : False : False : Integers
+        (10, 1) :     0 :  10.0 :    10 : False : False : Integers
+        (10, 2) :     0 :  10.0 :    10 : False : False : Integers
+        (10, 3) :     0 :  10.0 :    10 : False : False : Integers
+        (10, 4) :     0 :  10.0 :    10 : False : False : Integers
+
+1 Objective Declarations
+    obj : Size=1, Index=None, Active=True
+        Key  : Active : Sense    : Expression
+        None :   True : maximize : x[1,1] + x[1,2] + x[1,3] + x[1,4] + x[2,1] + x[2,2] + x[2,3] + x[2,4] + x[3,1] + x[3,2] + x[3,3] + x[3,4] + x[4,1] + x[4,2] + x[4,3] + x[4,4] + x[5,1] + x[5,2] + x[5,3] + x[5,4] + x[6,1] + x[6,2] + x[6,3] + x[6,4] + x[7,1] + x[7,2] + x[7,3] + x[7,4] + x[8,1] + x[8,2] + x[8,3] + x[8,4] + x[9,1] + x[9,2] + x[9,3] + x[9,4] + x[10,1] + x[10,2] + x[10,3] + x[10,4]
+
+4 Constraint Declarations
+    C1 : Size=4, Index=C1_index, Active=True
+        Key : Lower : Body                : Upper : Active
+          1 :  -Inf : 2*x[2,1] - 8*x[3,1] :   0.0 :   True
+          2 :  -Inf : 2*x[2,2] - 8*x[3,2] :   0.0 :   True
+          3 :  -Inf : 2*x[2,3] - 8*x[3,3] :   0.0 :   True
+          4 :  -Inf : 2*x[2,4] - 8*x[3,4] :   0.0 :   True
+    C2 : Size=2, Index=C2_index, Active=True
+        Key : Lower : Body                       : Upper : Active
+          1 :   1.0 : x[2,3] - 2*x[3,1] + x[4,3] :  +Inf :   True
+          2 :   1.0 : x[2,4] - 2*x[3,2] + x[4,4] :  +Inf :   True
+    C3 : Size=4, Index=C3_index, Active=True
+        Key : Lower : Body                                                                                     : Upper : Active
+          1 :  -Inf : x[1,1] + x[2,1] + x[3,1] + x[4,1] + x[5,1] + x[6,1] + x[7,1] + x[8,1] + x[9,1] + x[10,1] :  50.0 :   True
+          2 :  -Inf : x[1,2] + x[2,2] + x[3,2] + x[4,2] + x[5,2] + x[6,2] + x[7,2] + x[8,2] + x[9,2] + x[10,2] :  50.0 :   True
+          3 :  -Inf : x[1,3] + x[2,3] + x[3,3] + x[4,3] + x[5,3] + x[6,3] + x[7,3] + x[8,3] + x[9,3] + x[10,3] :  50.0 :   True
+          4 :  -Inf : x[1,4] + x[2,4] + x[3,4] + x[4,4] + x[5,4] + x[6,4] + x[7,4] + x[8,4] + x[9,4] + x[10,4] :  50.0 :   True
+    C4 : Size=3, Index=C4_index, Active=True
+        Key : Lower : Body                              : Upper : Active
+          1 :  -Inf : x[1,2] - x[2,1] + x[3,2] + x[4,2] :  10.0 :   True
+          2 :  -Inf : x[1,3] - x[2,2] + x[3,3] + x[4,3] :  10.0 :   True
+          3 :  -Inf : x[1,4] - x[2,3] + x[3,4] + x[4,4] :  10.0 :   True
+
+13 Declarations: x_index_0 x_index_1 x_index x obj C1_index C1 C2_index C2 C3_index C3 C4_index C4
+In [ ]:
+
+----------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------
+
+
+
+#Exercise 2: Solve the following nonlinear programming using IPOPT solver:
 #Solve $\max \cos(x+1) + \cos(x) + \cos(y)$
 #s.t. $-5 \leq x \leq 5$
 #     $-5 \leq y \leq 5$
@@ -47,9 +204,10 @@ Objective value: 0.9588510772084042
 x = -2.070796307837297
 y = -3.1415925748454043
 ----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------
 
 
-#EXERCISE 2: Solve another nonlinear programming using IPOPT solver
+#EXERCISE 3: Solve another nonlinear programming using IPOPT solver
 
 import pyomo.environ as pyo
 #from pyomo.environ import *
@@ -85,9 +243,10 @@ print("y =", model.y())
 Ans. Objective value: 43.66800831743047
 x = 5.972853552649766
 y = 1.770359897632616
+----------------------------------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------------------
 
-#Exercise 3: 
+#Exercise 4: 
 # Pyomo Pyomo with GLPK and Gurobi Example, which  solves a simple linear programming problem.
 # Source: Optimization with Python: Solve Operations Research Problems (Udemy course)
 
