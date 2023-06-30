@@ -66,3 +66,17 @@ The results is reported as the accuracy of each classifier, using the following 
 
 - Ipopt (Interior Point Optimizer, pronounced "Eye-Pea-Opt") is an open source software package for large-scale nonlinear optimization. Refer the documentation in https://coin-or.github.io/Ipopt/
 For installation: see https://www.coin-or.org/download/binary/Ipopt/
+# Example:  CASE STUDY
+
+Solve the following maximization problem (set upper limit of m and t as M=10, T=4, respectively):
+\begin{equation}
+\max \sum_m \sum_t x_{m,t}\\
+      2x_{2,t} - 8x_{3,t} \leq 0 \, \forall t\\
+      x_{2,t} - 2x_{3,t-2} + x_{4,t} \geq 1\, \forall t>2\\ 
+      \sum_m x_{m,t}  \leq 50 \, \forall t\\
+      x_{1,t} - x_{2,t-1} + x_{3,t} + x_{4,t}\leq 10\, \forall t>1\\
+      0 \leq x_{m,t} \leq 10 \, \forall m, \forall t
+\end{equation}
+
+
+
