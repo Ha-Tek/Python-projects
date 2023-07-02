@@ -66,7 +66,7 @@ The results is reported as the accuracy of each classifier, using the following 
 
 - Ipopt (Interior Point Optimizer, pronounced "Eye-Pea-Opt") is an open source software package for large-scale nonlinear optimization. Refer the documentation in https://coin-or.github.io/Ipopt/
 For installation: see https://www.coin-or.org/download/binary/Ipopt/
-# Example:  CASE STUDY
+# Example:  
 
 Solve the following maximization problem using GUROBI (set upper limit of m and t as M=10, T=4, respectively):
 
