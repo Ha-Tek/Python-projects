@@ -89,3 +89,5 @@ $2x_{2,t} - 8x_{3,t} \leq 0 \, \forall t$
 
 
 
+Source: Udemy 
+https://www.udemy.com/course/optimization-with-python-linear-nonlinear-and-cplex-gurobi/
