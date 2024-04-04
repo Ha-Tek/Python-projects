@@ -92,5 +92,22 @@ $2x_{2,t} - 8x_{3,t} \leq 0 \, \forall t$
 Source: Udemy 
 https://www.udemy.com/course/optimization-with-python-linear-nonlinear-and-cplex-gurobi/
 
-# 4.  Multiobjective optimization with Python: Multi-Objective Optimization and Decision-Making with pymoo: Balancing Objectives, Finding Solutions. 
+# 4.  Multiobjective optimization with Python: 
+
+Multi-Objective Optimization and Decision-Making with pymoo: Balancing Objectives, Finding Solutions. 
 https://pymoo.org
+
+Steps:
+1.    Install pymoo and import all the required libraries accordingly. 
+2.   Develop a class and define a problem.
+3. Initialize NSGA-II algorithm using below parameters:
+  pop_size = 50,
+  n_offsprings = 10,
+  cross_over = SBX(prob=0.9, eta=20),
+  mutation = PM(eta=25).
+4. Use n_eval = 100 termination criteria.
+5. Check out your objectives vector and visualize it in a 3d graph.
+6. Normalize the objective vector using ideal point and nadir point.
+7. Use Compromise Programming and Pseudo-weights methods to find the Optimum Point.
+ Note! Imagine that the first objective is less important thatìn the other for us.
+8. Visualise the results of each method and compare.
