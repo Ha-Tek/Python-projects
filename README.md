@@ -107,7 +107,7 @@ Steps to solve the given problem/Exercise:
   cross_over = SBX(prob=0.9, eta=20),
   mutation = PM(eta=25).
 4. Use n_eval = 100 termination criteria.
-5. Check out your objectives vector and visualize it in a 2d graph.
+5. Check out your objectives vector and visualize it.
 6. Normalize the objective vector using ideal point and nadir point.
 7. Use Compromise Programming and Pseudo-weights methods to find the Optimum Point.
  Note! Imagine that the first objective is less important than the other for us (assumption).
