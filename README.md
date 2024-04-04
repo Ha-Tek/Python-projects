@@ -92,7 +92,7 @@ $2x_{2,t} - 8x_{3,t} \leq 0 \, \forall t$
 Source: Udemy 
 https://www.udemy.com/course/optimization-with-python-linear-nonlinear-and-cplex-gurobi/
 
-# 4.  Multiobjective optimization with Python: 
+# 5.  Multiobjective optimization with Python: 
 
 Multi-Objective Optimization and Decision-Making with pymoo: Balancing Objectives, Finding Solutions. 
 
