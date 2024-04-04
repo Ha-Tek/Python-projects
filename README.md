@@ -58,8 +58,8 @@ The results is reported as the accuracy of each classifier, using the following 
 - LogLoass
 
 
-# 4.  Pyomo with solvers GLPK, IPOPT and GUROBI
-- Pyomo is a Python-based open-source software package that supports a diverse set of optimization capabilities for formulating, solving, and analyzing optimization models (framework for linear and nonlinear programming with many potential libraries). Refer http://www.pyomo.org
+# 4.  Pymoo with solvers GLPK, IPOPT and GUROBI
+- Pymoo is a Python-based open-source software package that supports a diverse set of optimization capabilities for formulating, solving, and analyzing optimization models (framework for linear and nonlinear programming with many potential libraries). Refer http://www.pyomo.org
 
 - The GLPK (GNU Linear Programming Kit) package is intended for solving large-scale linear programming (LP), mixed integer programming (MIP), and other related problems. It is a set of routines written in ANSI C and organized in the form of a callable library. Refer https://www.gnu.org/software/glpk/
 - If you don’t have acadeic license, it is better to use this solver inside Pyomo. See the installation page: https://ports.macports.org/port/glpk/
@@ -91,3 +91,6 @@ $2x_{2,t} - 8x_{3,t} \leq 0 \, \forall t$
 
 Source: Udemy 
 https://www.udemy.com/course/optimization-with-python-linear-nonlinear-and-cplex-gurobi/
+
+# 4.  Multiobjective optimization with Python: Multi-Objective Optimization and Decision-Making with pymoo: Balancing Objectives, Finding Solutions. 
+https://pymoo.org
