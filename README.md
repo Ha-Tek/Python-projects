@@ -98,7 +98,7 @@ Multi-Objective Optimization and Decision-Making with pymoo: Balancing Objective
 
 https://pymoo.org
 
-Steps to solve a given problem/Exercise:
+Steps to solve the given problem/Exercise:
 1.    Install pymoo and import all the required libraries accordingly. 
 2.   Develop a class and define a problem.
 3. Initialize NSGA-II algorithm using below parameters:
