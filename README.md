@@ -48,8 +48,10 @@ $\begin{equation*}
 \end{aligned}
 \end{equation*}$
 
+That is:
 
-$$ \begin{aligned} \min\quad & \lambda_{\max}\big(A(x)\big)\[4pt] \text{s.t.}\quad & \dfrac{1}{9}\le x_1 \le 9,\[2pt] & \dfrac{1}{9}\le x_2 \le 9. \end{aligned} $$
+$$ \begin{aligned} \min\quad & \lambda_{\max}\big(A(x)\big)\
+\text{s.t.}\quad & \dfrac{1}{9}\le x_1 \le 9,\  & \dfrac{1}{9}\le x_2 \le 9. \end{aligned} $$
 
 - Applying the Nelder-Mead algorithm, the algorithm arrives at the solution $x_1=3$ and $x_2=1$
 with $\lambda_{max}=4$. Consequently, the simplex steps of the algorithm that leads to the optimal solution are provided in the form of animation graphics.
