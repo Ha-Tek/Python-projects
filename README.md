@@ -26,7 +26,10 @@ Szádoczki, Z., Bozóki, S., & Tekile, H. A. (2022). Filling in pattern designs 
 
 
 # 2. The Nelder-Mead Algorithm simplex steps for the optimal completion of incomplete pairwise comparison matrices
+
 Consider the incomplete PCM $\mathbf{A}$ with two unknowns $(x_1,x_2)=\mathbf{x}$: 
+
+
 $\mathbf{A(x)} = 
 \begin{pmatrix}
 1 &x_1 &1/3 &x_2\\
@@ -35,14 +38,15 @@ $\mathbf{A(x)} =
 {1/x_2 &3 &1/3 &1
 \end{pmatrix}.$
 
-- The constrained eigenvalue minimization problem can be constructed as follows: 
-\begin{equation*}
+- The constrained eigenvalue minimization problem can be constructed as follows:
+  
+$\begin{equation*}
 \begin{aligned}
 \min \quad & \lambda_{max} \mathbf{(A(x))}\\
 \textrm{s.t.} \quad &1/9\leq x_1 \leq 9 \\
   &1/9\leq x_2 \leq 9 . 
 \end{aligned}
-\end{equation*}
+\end{equation*}$
 
 - Applying the Nelder-Mead algorithm, the algorithm arrives at the solution $x_1=3$ and $x_2=1$
 with $\lambda_{max}=4$. Consequently, the simplex steps of the algorithm that leads to the optimal solution are provided in the form of animation graphics.
