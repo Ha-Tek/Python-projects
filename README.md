@@ -38,6 +38,10 @@ $\mathbf{A(x)} =
 {1/x_2 &3 &1/3 &1
 \end{pmatrix}.$
 
+That is:
+
+\mathbf{A}(x) = \begin{pmatrix} 1 & x_1 & 1/3 & x_2 \ 1/x_1 & 1 & 1/9 & 1/3 \ 3 & 9 & 1 & 3 \ 1/x_2 & 3 & 1/3 & 1 \end{pmatrix}.
+
 - The constrained eigenvalue minimization problem can be constructed as follows:
   
 $\begin{equation*}
