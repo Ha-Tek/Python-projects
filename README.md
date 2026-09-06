@@ -43,7 +43,7 @@ $\mathbf{A(x)} =
 $\begin{equation*}
 \begin{aligned}
 \min \quad & \lambda_{max} \mathbf{(A(x))}\\
-\textrm{s.t.} \quad &1/9\leq x_1 \leq 9 \\
+\textrm{  s.t.} \quad &1/9\leq x_1 \leq 9 \\
   &1/9\leq x_2 \leq 9 . 
 \end{aligned}
 \end{equation*}$
