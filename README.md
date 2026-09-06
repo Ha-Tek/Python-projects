@@ -4,7 +4,7 @@
 
 Let $N=\{1,\ldots,22\}$ be the nodes, and let $P=\{i \in N,j \in N:i \text{ less than } j\}$ be the set of node pairs. For $(i,j) \in P$, let binary decision variable $X_{i,j}$ indicate whether $(i,j)$ is an edge. For $(i,j) \in P$ and $k \in N \setminus \{i,j\}$, let binary decision variable $Y_{i,j,k}$ indicate whether $k$ is a common neighbor of $i$ and $j$. For $(i,j) \in P$ let binary decision variable $SLACK_{i,j}$ be a slack variable. 
 
-The goal is to solve the following optimization problem:
+The goal is to solve the following  integer linear programming problem:
 
 
 $\min{\sum_{(i,j) \in P}{SLACK_{i,j}}}$
@@ -18,7 +18,9 @@ $\min{\sum_{(i,j) \in P}{SLACK_{i,j}}}$
 $Y_{i,j,k} \leq X_{j,k}$ [for j<k]+ $X_{k,j}$ [for k<j], $(i,j) \in P$ for  $k \in N \setminus \{i,j\}$
 
 
+
 - The integer program contains 5082 variables, 9493 constraints, and 1 objective function (when n=22)
+  
 
 Szádoczki, Z., Bozóki, S., & Tekile, H. A. (2022). Filling in pattern designs for incomplete pairwise comparison matrices:(quasi-) regular graphs with minimal diameter. Omega, 107, 102557.
 
