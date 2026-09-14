@@ -5,7 +5,43 @@ A collection of Python and MATLAB projects covering **mathematical optimization,
 
 ---
 
-## 1. Integer Linear Programming with Python and Gurobi
+## 1.  Machine Learning Classification Algorithms
+
+This project develops a machine learning classifier to predict whether a loan application will be **paid off or not**.
+
+The historical loan application dataset, `loan_train.csv`, is loaded, cleaned, and used to train and evaluate several classification models.
+
+### Classification Algorithms
+
+The following algorithms are implemented:
+
+1. **k-Nearest Neighbors (KNN)**
+2. **Decision Tree**
+3. **Support Vector Machine (SVM)**
+4. **Logistic Regression**
+
+### Model Evaluation
+
+The performance of each classifier is evaluated using appropriate classification metrics, including:
+
+* **Jaccard Index**
+* **F1-Score**
+* **Log Loss**
+
+The results are compared to determine which classification algorithm performs best for the loan prediction problem.
+
+### Technologies
+
+* Python
+* pandas
+* NumPy
+* scikit-learn
+* Machine Learning
+* Classification
+
+---
+
+## 2. Integer Linear Programming with Python and Gurobi
 
 This project uses **Python and Gurobi** to solve an integer linear programming (ILP) problem based on the following paper:
 
@@ -102,9 +138,9 @@ For $n=22$, the integer program contains:
 * Integer Linear Programming
 * Graph Optimization
 
----
+----
 
-## 2. Nelder-Mead Algorithm for Incomplete Pairwise Comparison Matrices
+## 3. Nelder-Mead Algorithm for Incomplete Pairwise Comparison Matrices
 
 This project implements the **Nelder-Mead algorithm** for the optimal completion of incomplete pairwise comparison matrices (PCMs).
 
@@ -176,41 +212,7 @@ The simplex steps leading to the optimal solution are presented as an animation.
 
 ---
 
-## 3. Machine Learning Classification Algorithms
 
-This project develops a machine learning classifier to predict whether a loan application will be **paid off or not**.
-
-The historical loan application dataset, `loan_train.csv`, is loaded, cleaned, and used to train and evaluate several classification models.
-
-### Classification Algorithms
-
-The following algorithms are implemented:
-
-1. **k-Nearest Neighbors (KNN)**
-2. **Decision Tree**
-3. **Support Vector Machine (SVM)**
-4. **Logistic Regression**
-
-### Model Evaluation
-
-The performance of each classifier is evaluated using appropriate classification metrics, including:
-
-* **Jaccard Index**
-* **F1-Score**
-* **Log Loss**
-
-The results are compared to determine which classification algorithm performs best for the loan prediction problem.
-
-### Technologies
-
-* Python
-* pandas
-* NumPy
-* scikit-learn
-* Machine Learning
-* Classification
-
----
 
 ## 4. Pyomo with GLPK, IPOPT, and Gurobi
 
