@@ -63,6 +63,7 @@ SLACK_{i,j}
 $$
 
 A common neighbor $k$ of $i$ and $j$ requires an edge between $i$ and $k$:
+
 $$
 Y_{i,j,k} \leq
 \begin{cases}
@@ -70,7 +71,6 @@ X_{i,k}, & \text{if } i < k,\\
 X_{k,i}, & \text{if } k < i.
 \end{cases}
 $$
-
 
 for all $(i,j)\in P$ and $k\in N\setminus{i,j}$.
 
