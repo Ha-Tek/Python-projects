@@ -63,14 +63,14 @@ SLACK_{i,j}
 $$
 
 A common neighbor $k$ of $i$ and $j$ requires an edge between $i$ and $k$:
-
 $$
 Y_{i,j,k} \leq
 \begin{cases}
-X_{i,k}, & i<k,\\
-X_{k,i}, & k<i,
+X_{i,k}, & \text{if } i < k,\\
+X_{k,i}, & \text{if } k < i.
 \end{cases}
 $$
+
 
 for all $(i,j)\in P$ and $k\in N\setminus{i,j}$.
 
@@ -79,10 +79,11 @@ Similarly, $k$ must be connected to $j$:
 $$
 Y_{i,j,k} \leq
 \begin{cases}
-X_{j,k}, & j<k,\\
-X_{k,j}, & k<j,
+X_{j,k}, & \text{if } j < k,\\
+X_{k,j}, & \text{if } k < j.
 \end{cases}
 $$
+
 
 for all $(i,j)\in P$ and $k\in N\setminus{i,j}$.
 
