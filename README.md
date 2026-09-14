@@ -7,7 +7,7 @@ A collection of Python projects covering **mathematical optimization, integer pr
 
 ## 1. Integer Linear Programming with Python and Gurobi
 
-This project uses **Python and Gurobi** to solve an Integer Linear Programming (ILP) problem from the following paper:
+This project uses **Python and Gurobi** to solve an integer linear programming (ILP) problem based on the following paper:
 
 > Szádoczki, Z., Bozóki, S., & Tekile, H. (2022). *Filling in pattern designs for incomplete pairwise comparison matrices: (quasi-) regular graphs with minimal diameter*. **Omega, 107**, 102557.
 
@@ -25,13 +25,13 @@ $$
 P = \{(i,j) : i,j \in N,\ i < j\}
 $$
 
-be the set of node pairs.
+be the set of unordered node pairs.
 
 For each $(i,j) \in P$, define the following binary decision variables:
 
-* $X_{i,j}$: indicates whether $(i,j)$ is an edge.
-* $Y_{i,j,k}$: indicates whether $k$ is a common neighbor of $i$ and $j$.
-* $SLACK_{i,j}$: a slack variable associated with the pair $(i,j)$.
+* $X_{i,j}$: equals 1 if $(i,j)$ is an edge and 0 otherwise.
+* $Y_{i,j,k}$: equals 1 if $k$ is a common neighbor of nodes $i$ and $j$ and 0 otherwise.
+* $SLACK_{i,j}$: nonnegative slack variable associated with the pair $(i,j)$.
 
 ### Objective Function
 
@@ -46,11 +46,11 @@ $$
 Each node must have degree 5:
 
 $$
-\sum_{\substack{(i,j)\in P\\ k\in\{i,j\}}} X_{i,j} = 5,
+\sum_{\substack{(i,j)\in P\\k\in\{i,j\}}} X_{i,j} = 5,
 \qquad \forall k\in N
 $$
 
-For every node pair, either the pair is directly connected, has a common neighbor, or requires slack:
+Each pair of nodes must either be directly connected, have a common neighbor, or use a slack variable:
 
 $$
 X_{i,j}
@@ -62,11 +62,10 @@ SLACK_{i,j}
 \qquad \forall (i,j)\in P
 $$
 
-The common-neighbor variable $Y_{i,j,k}$ is bounded by the corresponding edge between $i$ and $k$:
+A common neighbor $k$ of $i$ and $j$ requires an edge between $i$ and $k$:
 
 $$
-Y_{i,j,k}
-\leq
+Y_{i,j,k} \leq
 \begin{cases}
 X_{i,k}, & i<k,\\
 X_{k,i}, & k<i,
@@ -75,11 +74,10 @@ $$
 
 for all $(i,j)\in P$ and $k\in N\setminus{i,j}$.
 
-Similarly, $Y_{i,j,k}$ is bounded by the edge between $j$ and $k$:
+Similarly, $k$ must be connected to $j$:
 
 $$
-Y_{i,j,k}
-\leq
+Y_{i,j,k} \leq
 \begin{cases}
 X_{j,k}, & j<k,\\
 X_{k,j}, & k<j,
@@ -87,6 +85,7 @@ X_{k,j}, & k<j,
 $$
 
 for all $(i,j)\in P$ and $k\in N\setminus{i,j}$.
+
 
 ### Model Size
 
