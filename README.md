@@ -1,13 +1,13 @@
 
 # Python Projects
 
-This repository contains Python projects covering **mathematical optimization, operations research, machine learning, and multi-objective optimization**.
+A collection of Python projects covering **mathematical optimization, integer programming, nonlinear optimization, machine learning, and multi-objective optimization**.
 
 ---
 
 ## 1. Integer Linear Programming with Python and Gurobi
 
-This project uses **Python and Gurobi** to solve an Integer Linear Programming (ILP) problem based on the following paper:
+This project uses **Python and Gurobi** to solve an Integer Linear Programming (ILP) problem from the following paper:
 
 > Szádoczki, Z., Bozóki, S., & Tekile, H. (2022). *Filling in pattern designs for incomplete pairwise comparison matrices: (quasi-) regular graphs with minimal diameter*. **Omega, 107**, 102557.
 
@@ -22,20 +22,20 @@ $$
 be the set of nodes, and let
 
 $$
-P = \{(i,j): i,j \in N,\ i < j\}
+P = \{(i,j) : i,j \in N,\ i < j\}
 $$
 
-be the set of unordered node pairs.
+be the set of node pairs.
 
 For each $(i,j) \in P$, define the following binary decision variables:
 
-* $X_{i,j}$ — indicates whether $(i,j)$ is an edge.
-* $Y_{i,j,k}$ — indicates whether $k$ is a common neighbor of $i$ and $j$, where $k \in N \setminus {i,j}$.
-* $SLACK_{i,j}$ — a binary slack variable associated with pair $(i,j)$.
+* $X_{i,j}$: indicates whether $(i,j)$ is an edge.
+* $Y_{i,j,k}$: indicates whether $k$ is a common neighbor of $i$ and $j$.
+* $SLACK_{i,j}$: a slack variable associated with the pair $(i,j)$.
 
 ### Objective Function
 
-The objective is to minimize the total slack:
+The goal is to minimize the total slack:
 
 $$
 \min \sum_{(i,j)\in P} SLACK_{i,j}
@@ -46,11 +46,11 @@ $$
 Each node must have degree 5:
 
 $$
-\sum_{\substack{(i,j)\in P\\k\in\{i,j\}}} X_{i,j} = 5,
+\sum_{\substack{(i,j)\in P\\ k\in\{i,j\}}} X_{i,j} = 5,
 \qquad \forall k\in N
 $$
 
-For every pair $(i,j)\in P$, either $(i,j)$ is an edge, the two nodes have a common neighbor, or slack is introduced:
+For every node pair, either the pair is directly connected, has a common neighbor, or requires slack:
 
 $$
 X_{i,j}
@@ -62,7 +62,7 @@ SLACK_{i,j}
 \qquad \forall (i,j)\in P
 $$
 
-The common-neighbor variable is bounded by the existence of an edge between $i$ and $k$:
+The common-neighbor variable $Y_{i,j,k}$ is bounded by the corresponding edge between $i$ and $k$:
 
 $$
 Y_{i,j,k}
@@ -75,7 +75,7 @@ $$
 
 for all $(i,j)\in P$ and $k\in N\setminus{i,j}$.
 
-Similarly, the common-neighbor variable is bounded by the existence of an edge between $j$ and $k$:
+Similarly, $Y_{i,j,k}$ is bounded by the edge between $j$ and $k$:
 
 $$
 Y_{i,j,k}
@@ -90,70 +90,67 @@ for all $(i,j)\in P$ and $k\in N\setminus{i,j}$.
 
 ### Model Size
 
-For $n=22$, the resulting integer program contains approximately:
+For $n=22$, the integer programming model contains approximately:
 
 * **5,082 variables**
 * **9,493 constraints**
 * **1 objective function**
 
-### Reference
+### Tools
 
-Szádoczki, Z., Bozóki, S., & Tekile, H. (2022). *Filling in pattern designs for incomplete pairwise comparison matrices: (quasi-) regular graphs with minimal diameter*. **Omega, 107**, 102557.
+* Python
+* Gurobi
+* Integer Linear Programming
 
 ---
 
-# 2. Nelder-Mead Algorithm for Incomplete Pairwise Comparison Matrices
+## 2. Nelder-Mead Algorithm for Incomplete Pairwise Comparison Matrices
 
-This project implements the **Nelder-Mead simplex algorithm** for the optimal completion of incomplete pairwise comparison matrices (PCMs).
+This project implements the **Nelder-Mead simplex algorithm** for the optimal completion of incomplete Pairwise Comparison Matrices (PCMs).
 
-The implementation uses MATLAB's `fminsearch`, which is based on the standard Nelder-Mead algorithm, together with a **coordinate transformation** technique.
+The implementation uses MATLAB's `fminsearch`, which is based on the standard Nelder-Mead algorithm, together with a coordinate transformation approach.
 
 ### Incomplete Pairwise Comparison Matrix
 
-Consider the incomplete PCM $\mathbf{A}(x)$ with two unknown entries:
+Consider the incomplete PCM $\mathbf{A}(\mathbf{x})$ with two unknown values:
 
 $$
-x =
+\mathbf{x} = (x_1,x_2)
+$$
+
+The matrix is:
+
+$$
+\mathbf{A}(\mathbf{x}) =
 \begin{pmatrix}
-x_1\\
-x_2
-\end{pmatrix}.
-$$
-
-The matrix is
-
-$$
-\mathbf{A}(x)
-=
-\begin{pmatrix}
-1 & x_1 & \frac{1}{3} & x_2\\
-\frac{1}{x_1} & 1 & \frac{1}{9} & \frac{1}{3}\\
-3 & 9 & 1 & 3\\
+1 & x_1 & \frac{1}{3} & x_2 \\
+\frac{1}{x_1} & 1 & \frac{1}{9} & \frac{1}{3} \\
+3 & 9 & 1 & 3 \\
 \frac{1}{x_2} & 3 & \frac{1}{3} & 1
-\end{pmatrix}.
+\end{pmatrix}
 $$
 
 ### Constrained Eigenvalue Minimization
 
-The optimal completion can be formulated as the following constrained optimization problem:
+The optimal completion can be formulated as:
 
 $$
 \begin{aligned}
-\min \quad & \lambda_{\max}\left(\mathbf{A}(x)\right)\\
-\text{subject to}\quad
-& \frac{1}{9}\leq x_1\leq 9,\\
-& \frac{1}{9}\leq x_2\leq 9.
+\min \quad & \lambda_{\max}\left(\mathbf{A}(\mathbf{x})\right) \\
+\text{subject to} \quad
+& \frac{1}{9} \leq x_1 \leq 9, \\
+& \frac{1}{9} \leq x_2 \leq 9.
 \end{aligned}
 $$
 
 ### Result
 
-Using the Nelder-Mead algorithm, the optimal solution is:
+Applying the **Nelder-Mead algorithm** produces the optimal solution:
 
 $$
 x_1 = 3,
 \qquad
-x_2 = 1,
+x_2 = 1
 $$
 
 with
@@ -162,156 +159,181 @@ $$
 \lambda_{\max} = 4.
 $$
 
-The simplex steps leading to the optimal solution are presented as an **animation**.
+The simplex iterations leading to the optimal solution are visualized using animation graphics.
+
+### Topics
+
+* Nelder-Mead optimization
+* Simplex methods
+* Pairwise Comparison Matrices
+* Eigenvalue optimization
+* Incomplete PCMs
+* Coordinate transformations
 
 ---
 
-# 3. Machine Learning Classification Algorithms
+## 3. Machine Learning Classification Algorithms
 
-This project focuses on building machine learning classifiers to predict whether a **loan application will be paid off or not**.
+This project develops machine learning classifiers to predict whether a **loan application will be paid off or not**.
 
-The project uses a historical loan dataset, `loan_train.csv`, which is cleaned and prepared before applying several classification algorithms.
+The historical loan dataset (`loan_train.csv`) is cleaned and prepared before applying several classification algorithms.
 
 ### Classification Algorithms
 
-The following algorithms are implemented and compared:
+The following models are implemented:
 
-* **K-Nearest Neighbors (KNN)**
-* **Decision Tree**
-* **Support Vector Machine (SVM)**
-* **Logistic Regression**
+1. **K-Nearest Neighbors (KNN)**
+2. **Decision Tree**
+3. **Support Vector Machine (SVM)**
+4. **Logistic Regression**
 
 ### Model Evaluation
 
-The performance of each classifier is evaluated using the following metrics, where applicable:
+The classifiers are evaluated using appropriate performance metrics, including:
 
 * **Jaccard Index**
 * **F1-Score**
 * **Log Loss**
 
-The results are compared to determine which classification algorithm performs best for the loan prediction problem.
+The objective is to compare the performance of the different classification algorithms and identify the most suitable model for the loan classification problem.
+
+### Topics
+
+* Data preprocessing
+* Supervised learning
+* Classification
+* Model evaluation
+* Scikit-learn
 
 ---
 
-# 4. Pyomo with GLPK, IPOPT, and Gurobi
+## 4. Pyomo with GLPK, IPOPT, and Gurobi
 
-This project explores mathematical optimization using **Pyomo** with several optimization solvers.
+This project explores mathematical optimization in Python using **Pyomo** and several optimization solvers.
 
-## Pyomo
+### Pyomo
 
-[Pyomo](https://www.pyomo.org/) is an open-source Python-based optimization modeling package. It supports a wide range of optimization problems, including:
+[Pyomo](https://www.pyomo.org/) is an open-source Python-based optimization modeling package that supports a wide range of optimization problems, including:
 
 * Linear programming (LP)
 * Mixed-integer programming (MIP)
 * Nonlinear programming (NLP)
 * Mixed-integer nonlinear programming (MINLP)
 
-## GLPK
+### GLPK
 
-[GLPK (GNU Linear Programming Kit)](https://www.gnu.org/software/glpk/) is an open-source solver designed for:
+[GLPK (GNU Linear Programming Kit)](https://www.gnu.org/software/glpk/) is an open-source solver for:
 
-* Linear programming (LP)
-* Mixed-integer programming (MIP)
+* Linear programming
+* Mixed-integer programming
 * Related optimization problems
 
-GLPK is particularly useful when an academic/commercial solver license such as Gurobi is not available.
+For users without an academic Gurobi license, GLPK is a useful open-source alternative for many linear and mixed-integer optimization problems.
 
 Installation information:
 
-[GLPK Installation Guide](https://ports.macports.org/port/glpk/)
+[GLPK Installation — MacPorts](https://ports.macports.org/port/glpk/)
 
-## IPOPT
+### IPOPT
 
-[IPOPT (Interior Point Optimizer)](https://coin-or.github.io/Ipopt/) is an open-source solver for large-scale nonlinear optimization problems.
+[IPOPT (Interior Point Optimizer)](https://coin-or.github.io/Ipopt/) is an open-source solver designed for large-scale nonlinear optimization problems.
 
 Installation resources:
 
-[IPOPT Documentation](https://coin-or.github.io/Ipopt/)
+[IPOPT Downloads](https://www.coin-or.org/download/binary/Ipopt/)
 
 ---
 
-## Example: Optimization with Gurobi
+### Example: Optimization with Gurobi
 
 Consider the following maximization problem.
 
 Let:
 
 $$
-M=10,\qquad T=4.
-$$
-
-### Objective Function
-
-$$
-\max \sum_m\sum_t x_{m,t}
-$$
-
-### Constraints
-
-For every $t$:
-
-$$
-2x_{2,t}-8x_{3,t}\leq0
-$$
-
-For $t>2$:
-
-$$
-x_{2,t}-2x_{3,t-2}+x_{4,t}\geq1
-$$
-
-For every $t$:
-
-$$
-\sum_m x_{m,t}\leq50
-$$
-
-For $t>1$:
-
-$$
-x_{1,t}-x_{2,t-1}+x_{3,t}+x_{4,t}\leq10
-$$
-
-Variable bounds:
-
-$$
-0\leq x_{m,t}\leq10,
+M = 10,
 \qquad
-\forall m,\forall t
+T = 4
 $$
 
-The problem is implemented and solved using **Gurobi** through Python.
+The objective is:
+
+$$
+\max \sum_{m=1}^{M}\sum_{t=1}^{T} x_{m,t}
+$$
+
+subject to:
+
+$$
+2x_{2,t} - 8x_{3,t} \leq 0,
+\qquad \forall t
+$$
+
+$$
+x_{2,t} - 2x_{3,t-2} + x_{4,t} \geq 1,
+\qquad \forall t>2
+$$
+
+$$
+\sum_{m=1}^{M}x_{m,t} \leq 50,
+\qquad \forall t
+$$
+
+$$
+x_{1,t} - x_{2,t-1} + x_{3,t} + x_{4,t} \leq 10,
+\qquad \forall t>1
+$$
+
+with variable bounds:
+
+$$
+0 \leq x_{m,t} \leq 10,
+\qquad
+\forall m,\forall t.
+$$
+
+### Tools
+
+* Python
+* Pyomo
+* Gurobi
+* GLPK
+* IPOPT
 
 ### Source
 
-[Optimization with Python: Linear, Nonlinear and CPLEX/Gurobi](https://www.udemy.com/course/optimization-with-python-linear-nonlinear-and-cplex-gurobi/)
+Udemy:
+
+[Optimization with Python — Linear, Nonlinear, and CPLEX/Gurobi](https://www.udemy.com/course/optimization-with-python-linear-nonlinear-and-cplex-gurobi/)
 
 ---
 
-# 5. Multi-Objective Optimization with Python
+## 5. Multi-Objective Optimization with Python
 
-This project explores **multi-objective optimization and decision-making** using the Python library [pymoo](https://pymoo.org/).
+This project explores **multi-objective optimization and decision-making** using Python and the [`pymoo`](https://pymoo.org/) framework.
 
-The main focus is on using **NSGA-II** to generate a set of Pareto-optimal solutions and then applying different decision-making techniques to select a preferred solution.
+The main goal is to balance multiple competing objectives and identify appropriate compromise solutions.
 
-## Workflow
+### Optimization Framework
 
-### 1. Install and Import Libraries
+The project follows these steps:
+
+#### 1. Install and Import Libraries
 
 Install `pymoo` and import the required Python libraries.
 
-### 2. Define the Optimization Problem
+#### 2. Define the Optimization Problem
 
 Create a custom problem class and define:
 
 * Decision variables
 * Objective functions
+* Constraints
 * Variable bounds
-* Constraints, if applicable
 
-### 3. Configure NSGA-II
+#### 3. Configure NSGA-II
 
-Initialize the NSGA-II algorithm using:
+The **NSGA-II** algorithm is initialized using:
 
 ```python
 pop_size = 50
@@ -320,76 +342,79 @@ crossover = SBX(prob=0.9, eta=20)
 mutation = PM(eta=25)
 ```
 
-### 4. Set Termination Criteria
+#### 4. Define the Termination Criterion
 
-Use:
+The optimization is terminated after:
 
 ```python
 n_eval = 100
 ```
 
-as the termination criterion based on the number of function evaluations.
+function evaluations.
 
-### 5. Visualize the Objectives
+#### 5. Visualize the Objective Space
 
-Examine the resulting objective vectors and visualize the Pareto front.
+Examine and visualize the resulting objective vectors.
 
-### 6. Normalize the Objective Vector
+#### 6. Normalize the Objectives
 
-Normalize the objective values using the:
+Normalize the objective vectors using the:
 
 * **Ideal point**
 * **Nadir point**
 
-### 7. Select a Preferred Solution
+#### 7. Identify a Compromise Solution
 
-Apply the following decision-making methods:
+Apply the following multi-criteria decision-making approaches:
 
 * **Compromise Programming**
 * **Pseudo-Weights**
 
 > **Assumption:** The first objective is considered less important than the other objectives.
 
-### 8. Compare the Results
+#### 8. Compare the Results
 
-Visualize and compare the solutions obtained from the different decision-making methods.
+Visualize and compare the solutions obtained using the different decision-making methods.
 
-### Source
+### Topics
 
-[Multi-Objective Optimization with Python Bootcamp](https://www.udemy.com/course/multi-objective-optimization-with-python-bootcamp-a-z/?couponCode=KEEPLEARNING)
+* Multi-objective optimization
+* NSGA-II
+* Pareto-optimal solutions
+* Ideal and nadir points
+* Compromise programming
+* Pseudo-weights
+* Decision-making
+
+### Resources
+
+* [pymoo Documentation](https://pymoo.org/)
+* [Udemy — Multi-Objective Optimization with Python](https://www.udemy.com/course/multi-objective-optimization-with-python-bootcamp-a-z/?couponCode=KEEPLEARNING)
 
 ---
 
 ## Technologies and Tools
 
-The projects in this repository use a variety of mathematical, optimization, and machine learning tools:
+| Area                         | Tools / Libraries          |
+| ---------------------------- | -------------------------- |
+| Programming                  | Python, MATLAB             |
+| Mathematical Optimization    | Pyomo, Gurobi, GLPK, IPOPT |
+| Multi-Objective Optimization | pymoo, NSGA-II             |
+| Machine Learning             | scikit-learn               |
+| Optimization Algorithms      | Nelder-Mead                |
+| Data Analysis                | NumPy, Pandas              |
+| Visualization                | Matplotlib                 |
 
-| Area                         | Tools / Libraries                  |
-| ---------------------------- | ---------------------------------- |
-| Programming                  | Python, MATLAB                     |
-| Mathematical Optimization    | Pyomo                              |
-| Optimization Solvers         | Gurobi, GLPK, IPOPT                |
-| Multi-Objective Optimization | pymoo, NSGA-II                     |
-| Machine Learning             | Scikit-learn                       |
-| Numerical Optimization       | Nelder-Mead                        |
-| Decision Analysis            | AHP / Pairwise Comparison Matrices |
-| Data Analysis                | Pandas, NumPy                      |
-| Visualization                | Matplotlib                         |
+## References
 
-## Topics Covered
+1. Szádoczki, Z., Bozóki, S., & Tekile, H. (2022). *Filling in pattern designs for incomplete pairwise comparison matrices: (quasi-) regular graphs with minimal diameter*. **Omega, 107**, 102557.
+2. [Pyomo](https://www.pyomo.org/)
+3. [GLPK](https://www.gnu.org/software/glpk/)
+4. [IPOPT](https://coin-or.github.io/Ipopt/)
+5. [pymoo](https://pymoo.org/)
+6. [Udemy — Optimization with Python](https://www.udemy.com/course/optimization-with-python-linear-nonlinear-and-cplex-gurobi/)
+7. [Udemy — Multi-Objective Optimization with Python](https://www.udemy.com/course/multi-objective-optimization-with-python-bootcamp-a-z/?couponCode=KEEPLEARNING)
 
-* Integer Linear Programming
-* Linear and Nonlinear Optimization
-* Mathematical Programming
-* Graph-Based Optimization
-* Incomplete Pairwise Comparison Matrices
-* Analytic Hierarchy Process (AHP)
-* Nelder-Mead Optimization
-* Machine Learning Classification
-* Multi-Objective Optimization
-* Pareto Optimization
-* Decision-Making
-* Optimization Solver Comparison
 
 
 
