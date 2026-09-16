@@ -144,7 +144,6 @@ For $n=22$, the integer program contains:
 
 This project implements the **Nelder-Mead algorithm** for the optimal completion of incomplete pairwise comparison matrices (PCMs).
 
-The implementation uses MATLAB's `fminsearch`, which is based on the standard Nelder-Mead simplex algorithm, together with a coordinate transformation technique.
 
 ### Incomplete Pairwise Comparison Matrix
 
@@ -202,13 +201,7 @@ $$
 
 The simplex steps leading to the optimal solution are presented as an animation.
 
-### Technologies
 
-* MATLAB
-* Nelder-Mead optimization
-* `fminsearch`
-* Pairwise Comparison Matrices
-* Eigenvalue optimization
 
 ---
 
