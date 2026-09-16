@@ -1,7 +1,7 @@
 
-# Python and MATLAB Projects
+# Python Projects
 
-A collection of Python and MATLAB projects covering **mathematical optimization, integer programming, nonlinear optimization, machine learning, and multi-objective optimization**.
+A collection of Python  projects covering **mathematical optimization, integer programming, nonlinear optimization, machine learning, and multi-objective optimization**.
 
 ---
 
